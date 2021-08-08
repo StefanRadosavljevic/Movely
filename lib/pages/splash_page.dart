@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:moviesapp/models/app_config.dart';
+import 'package:moviesapp/service/http_service.dart';
 
 class SplashPage extends StatefulWidget {
   //when splashscreen is finished this callback will be called
@@ -37,12 +38,15 @@ class _SplashPageState extends State<SplashPage> {
     // decode json file into data
     final configData = jsonDecode(configFile);
 
-    //register AppConfig with getit(still dont understand what this thing is doing)
+    // create AppConfig object that will be used in HTTPService object.
     getIt.registerSingleton<AppConfig>(AppConfig(
       API_KEY: configData['API_KEY'],
       BASE_API_URL: configData['BASE_API_URL'],
       BASE_IMAGE_API_URL: configData['BASE_IMAGE_API_URL'],
     ));
+
+    // register create HTTP service object.
+    getIt.registerSingleton<HTTPService>(HTTPService());
   }
 
   @override
