@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moviesapp/models/movie.dart';
 import 'package:moviesapp/models/search_category.dart';
 
 class HomePage extends ConsumerWidget {
@@ -69,6 +70,11 @@ class HomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _topBarWidget(),
+            Container(
+              height: _deviceHeight * 0.80,
+              padding: EdgeInsets.symmetric(vertical: _deviceHeight * 0.05),
+              child: _moviesListViewWidget(),
+            ),
           ],
         ),
       ),
@@ -152,5 +158,41 @@ class HomePage extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  Widget _moviesListViewWidget() {
+    final List<Movie> _movies = [];
+
+    for (var i = 0; i < 20; i++) {
+      _movies.add(Movie(
+        name: "Fight Club",
+        description:
+            "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
+        isAdult: false,
+        backdropPath: "/rr7E0NoGKxvbkb89eR1GwfoYjpA.jpg",
+        posterPath: "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+        language: "EN",
+        rating: 8.4,
+        releaseDate: "1999-10-15",
+      ));
+    }
+    if (_movies.length != 0) {
+      return ListView.builder(
+          itemCount: _movies.length,
+          itemBuilder: (context, int _count) {
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: _deviceHeight * 0.01, horizontal: 0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Text(_movies[_count].name),
+              ),
+            );
+          });
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
   }
 }

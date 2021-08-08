@@ -40,6 +40,7 @@ class Movie {
   String posterURL() {
     // get app config class
     final AppConfig _appConfig = GetIt.instance.get<AppConfig>();
+    // combine strings
     return '${_appConfig.BASE_IMAGE_API_URL}${this.posterPath}';
   }
 
