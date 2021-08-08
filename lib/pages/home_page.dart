@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moviesapp/models/movie.dart';
 import 'package:moviesapp/models/search_category.dart';
+import 'package:moviesapp/widgets/movie_tile.dart';
 
 class HomePage extends ConsumerWidget {
   double _deviceHeight;
@@ -22,6 +23,7 @@ class HomePage extends ConsumerWidget {
 
   Widget _buildUI() {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: Container(
         height: _deviceHeight,
@@ -66,7 +68,7 @@ class HomePage extends ConsumerWidget {
         width: _deviceWidth * 0.88,
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _topBarWidget(),
@@ -185,7 +187,11 @@ class HomePage extends ConsumerWidget {
                   vertical: _deviceHeight * 0.01, horizontal: 0),
               child: GestureDetector(
                 onTap: () {},
-                child: Text(_movies[_count].name),
+                child: MovieTile(
+                  movie: _movies[_count],
+                  height: _deviceHeight * 0.20,
+                  width: _deviceWidth * 0.85,
+                ),
               ),
             );
           });
