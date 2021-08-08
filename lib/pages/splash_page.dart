@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:moviesapp/models/app_config.dart';
 import 'package:moviesapp/service/http_service.dart';
+import 'package:moviesapp/services/movie_service.dart';
 
 class SplashPage extends StatefulWidget {
   //when splashscreen is finished this callback will be called
@@ -47,6 +48,9 @@ class _SplashPageState extends State<SplashPage> {
 
     // register create HTTP service object.
     getIt.registerSingleton<HTTPService>(HTTPService());
+
+    // moviservice is dependant on HTTP service.
+    getIt.registerSingleton<MovieService>(MovieService());
   }
 
   @override
