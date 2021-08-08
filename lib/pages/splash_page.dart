@@ -13,8 +13,15 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2)).then((_) => widget.onInitComplete());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Movely',
       home: Center(
         child: Container(
